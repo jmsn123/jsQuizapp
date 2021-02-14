@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0 auto;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.user-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.user-contianer {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
+.correct {
+    background-color: green;
+    outline: none;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
