@@ -1,13 +1,34 @@
-const quizContainer = document.querySelector("#quiz");
+const quizContainer = document.querySelector("#quizContainer");
 const resultsContainer = document.querySelector("#results");
 const submitButton = document.querySelector("#submit");
 const prevButton = document.querySelector("#pre");
 const nextButton = document.querySelector("#next");
-const answerContainer = document.querySelector("#answerContainer");
+const answers = document.querySelector(".answers");
 var currentQuest = 0;
+let startdiv = document.querySelector(".start")
+let question = document.getElementById("question")
+let answerContainer = document.getElementById("quizContainer");
+let score = 0;
+var questionContainer = document.getElementById("question");
+var startButton = document.getElementById("start");
+const scores = document.querySelector(".scores");
+const time = document.querySelector("#timer");
+const results = document.getElementById("results");
+startButton.addEventListener("click", start);
+let t;
 nextButton.addEventListener("click", function() {
-    console.log("made it far");
+    if (currentQuest === myQuestions.length) {
+        end();
+        console.log("here")
+        clearElement([question, answers])
+        return;
+
+    }
+    clearElement([question, answers])
+    setupQuestion();
+    setupAnswers();
 });
+
 const myQuestions = [{
         question: "Who invented JavaScript?",
         answers: ["Douglas Crockford", "Sheryl Sandberg", "Brendan Eich"],
@@ -25,106 +46,133 @@ const myQuestions = [{
     },
 ];
 
-function setupQuestion() {
-    let answerContainer = document.createElement("div");
-    var questionIndex = myQuestions[currentQuest];
-    // each question create an element
-    let questions = document.createElement("p");
-    //  add content to that element
-    questions.innerText = questionIndex.question;
-    answerContainer.classList.add("user-container");
-    quizContainer.append(questions);
-    for (let i = 0; i < questionIndex.answers.length; i++) {
-        let answer = document.createElement("button");
-        answer.innerText = questionIndex.answers[i];
-        answer.classList.add("correct");
-        if (questionIndex.correctAnswer === i) {
-            answer.dataset.correct = i;
-        }
-        answerContainer.append(answer);
-        quizContainer.append(answerContainer);
+// function timer() {
+//     let count = 60;
+//     count--;
+//     console.log("strated timer")
+//     const interval = setInterval(() => {
+//         time.innerHTML = count
+//         console.log()
+//         if (count <= 0) {
+//             count = 0;
+//             clearInterval(interval)
+//             end()
+//         }
+//     }, 1000);
 
-        answer.addEventListener("click", checkAnswers);
+// }
+
+let count = 60;
+
+let timerr = () => {
+    count--;
+    time.textContent = count
+    if (count === 0) {
+        end()
     }
 }
-setupQuestion();
+
+function start() {
+    console.log("we here ")
+    t = setInterval(timerr, 1000)
+    score = 0;
+    currentQuest = 0;
+    setupQuestion();
+    setupAnswers();
+    removeClasses(startdiv, 1);
+    removeClasses(scores, 0);
+    removeClasses(resultsContainer, 0);
+}
+var questionIndex = myQuestions[currentQuest];
+
+function clearElement(elem) {
+    elem.map(item => {
+        item.innerHTML = ""
+    })
+}
+
+function setupQuestion() {
+    console.log(currentQuest === myQuestions.length)
+    if (currentQuest === myQuestions.length) {
+        end();
+        return;
+
+    }
+    results.textContent = score;
+    clearElement([quizContainer])
+    question.textContent = myQuestions[currentQuest].question;
+    quizContainer.classList.remove("hide");
+    question.classList.remove("hide");
+    question.classList.add("show");
+    quizContainer.classList.add("show");
+    quizContainer.append(question);
+}
+
+function setupAnswers() {
+    for (let i = 0; i < myQuestions[currentQuest].answers.length; i++) {
+        let answer = document.createElement("button");
+        // console.log(questionIndex.answers);
+        answer.innerText = myQuestions[currentQuest].answers[i];
+        const cls = ["btn", "btn-success", "btn-lg"]
+        answer.classList.add(...cls);
+        if (myQuestions[currentQuest].correctAnswer === i) {
+            answer.dataset.correct = i;
+        }
+        answers.append(answer);
+        quizContainer.append(answers)
+        answer.addEventListener("click", checkAnswers);
+    }
+    currentQuest++;
+}
+// setupQuestion();
+
+function removeClasses(elm, sw) {
+    if (sw) {
+        elm.classList.remove("show");
+        elm.classList.add("hide");
+    } else {
+        elm.classList.remove("hide");
+        elm.classList.add("show");
+    }
+}
+
+
 
 function checkAnswers(e) {
     var selectedAnswer = e.target.dataset;
     if (selectedAnswer.correct) {
+        answers.remove();
         nextButton.classList.add("show");
         e.target.classList.add("correct");
-        currentQuest++;
-
-        setupQuestion();
+        score += 5;
+        clearElement([question, answers])
+        if (currentQuest === myQuestions.length) {
+            end();
+            return;
+        }
+        setupQuestion()
+        setupAnswers()
+    } else {
+        count -= 5
+        answers.remove();
+        nextButton.classList.add("show");
+        e.target.classList.add("correct");
+        clearElement([question, answers])
+        if (currentQuest === myQuestions.length) {
+            end();
+            return;
+        }
+        setupQuestion()
+        setupAnswers()
     }
 }
 
-// let shuffledQuestion = 0;
-
-// function setup(e) {
-//     shuffledQuestion = myQuestions.sort(() => Math.random() - 0.5);
-//     console.log(shuffledQuestion);
-//     setupQues(shuffledQuestion);
-//     showResults();
-// }
-
-// function setupQues(q) {
-//     resetStatus();
-//     let result = [];
-//     var button = document.createElement("button");
-
-//     q.forEach((question, questionIndex) => {
-//         let answers = [];
-
-//         for (choice in question.answers) {
-//             answers.push(
-//                 `<div class="form-check"> <input class = "form-check-input"type ="radio"name =${choice} id = "option-${choice}"> <label class = "form-check-label"for="flexRadioDefault1">
-//                 ${choice} ${question.answers[choice]}
-//                 </label> </div>`
-//             );
-//         }
-//         button.innerHTML = answers;
-
-//         result.push(
-//             '<div class="row"id="questions"><div class="col-md-12"><label>' +
-//             question.question +
-//             "</label>" +
-//             "<div class='answers'>" +
-//             answers.join("") +
-//             "</div></div></div>"
-//         );
-//     });
-//     quizContainer.innerHTML = result.join("");
-// }
-
-// function resetStatus() {
-//     clearSatus(document.body);
-//     // this will hide our nextbutton cause we dont need it right now
-//     nextButton.classList.add("hide");
-// }
-
-// function clearSatus(element) {
-//     element.classList.remove("correct");
-//     element.classList.remove("wrong");
-// }
-
-// function showResults() {
-//     const answersContainers = quizContainer.querySelectorAll(".form-check-input");
-//     let numCorrect = 0;
-//     console.log(answersContainers);
-//     for (let i = 0; i < myQuestions.length; i++) {
-//         let answer = answersContainers[i];
-//         let element = `input[name=${answer.name}]:checked`;
-//         let correctAnswer = (answer.querySelector(element) || {}).value;
-//         console.log(correctAnswer);
-//         if (correctAnswer === myQuestions.correctAnswer) {
-//             console.log(correctAnswer);
-//         }
-//     }
-//     console.log("Containers", answersContainers);
-// }
-
-// setup();
-// nextButton.addEventListener("click", setupQuestion);
-// submitButton.addEventListener("click", showResults);
+function end() {
+    count = 0;
+    clearInterval(t)
+    removeClasses(nextButton, 1);
+    console.log("end")
+    results.textContent = score;
+    removeClasses(startButton, 0);
+    score = 0;
+}

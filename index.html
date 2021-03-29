@@ -8,20 +8,42 @@
     <meta name="Description" content="Enter your description here" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="./assets/style.css">
-    <title>Title</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <title>jzquizapp</title>
 </head>
 
 <body>
-    <main>
-        <section class="container" id="quiz">
+    <div class="container">
+        <div class="scores hide">
+            <p id="results"></p>
+            <p id="timer"></p>
+        </div>
+        <div class="start show">
+            <div class="jumbotron">
+                <h1 class="display-4">
+                    Welcome to the quiz app
+                </h1>
+                <div class="buttons">
+                    <buttons id="start" class="btn btn-primary btn-lg">Start</buttons>
+                    <buttons class="btn btn-success btn-lg">Show Scores</buttons>
+                </div>
+            </div>
 
-        </section>
-        <section class="user-button"> <button class="hide" id="next">Next</button>
-        </section>
-        <section id="results"></section>
+        </div>
 
-    </main>
+        <div id="quizContainer" class="hide">
+            <p id="question"></p>
+            <div class="answers">
+
+            </div>
+
+        </div>
+        <div class="controls">
+            <button class="btn btn-success btn-lg" id="prev">prev</button>
+            <button class="btn btn-success btn-lg" id="next">next</button>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="./assets/js/script.js"></script>

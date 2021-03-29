@@ -2,9 +2,51 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 0 auto;
+    width: 100vw;
     flex-direction: column;
     margin: 20px 0;
+    border: blue solid 10px;
+}
+
+.start {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: orangered */
+}
+
+#quizContainer {
+    border: red solid 10px;
+    margin-bottom: 6rem;
+    padding: 5rem;
+}
+
+#quizContainer>p {
+    text-align: center;
+}
+
+.jumbotron {
+    padding: 5rem;
+    margin-top: 35rem;
+    /* height: 100vh; */
+    border: orange solid 10px;
+    text-align: center;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.buttons {
+    text-align: center;
+    margin: 3rem 0 0 0;
 }
 
 .user-button {
@@ -13,8 +55,63 @@
     align-items: center;
 }
 
-.hide {
-    display: none;
+header ul {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.button {
+    display: inline-block;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    padding: 6px 12px;
+    border-radius: 9px;
+    margin-right: 30px;
+}
+
+button {
+    position: relative;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 15px 0 0;
+}
+
+.final__facebook-style-btn {
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+.final__facebook-style-dark {
+    -moz-box-shadow: inset 0px 1px 0px 0px #4d73bf;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #4d73bf;
+    box-shadow: inset 0px 1px 0px 0px #4d73bf;
+    background: #4267b2;
+    border: 1px solid #4267b2;
+    color: #fff;
+    text-shadow: 0 1px 0px #3359a5;
+}
+
+.final__facebook-style-dark:hover {
+    background: #2b54a7;
+}
+
+.final__facebook-style-dark:active {
+    background: #1d4698;
+    border-color: #1d4698;
+}
+
+#info {
+    width: 230px;
+    background-color: aqua;
+}
+
+#question {
+    font-size: 25px;
+    letter-spacing: 1.9;
 }
 
 .show {
@@ -35,4 +132,45 @@
     border-radius: 10px;
     padding: 10px;
     color: white;
+}
+
+#info {
+    padding: 20px;
+}
+
+#info li {
+    list-style-type: none;
+}
+
+#quiz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#results {
+    width: 200px;
+    height: 200px;
+    font-size: 4rem;
+    /* background-color: red; */
+    text-align: center;
+}
+
+.scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#timer {
+    text-align: center;
+}
+
+.answers {
+    text-align: center;
+}
+
+.controls {
+    display: flex
 }
