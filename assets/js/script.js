@@ -17,7 +17,7 @@ const results = document.getElementById("results");
 startButton.addEventListener("click", start);
 let t;
 const soresControl = document.querySelector(".scoresname")
-let storage = localStorage.getItem('scores') || []
+let storage = JSON.parse(localStorage.getItem('scores')) || []
 const highScoreform = document.querySelector("#highScoreinput")
 nextButton.addEventListener("click", function() {
     if (currentQuest === myQuestions.length) {
@@ -170,11 +170,13 @@ function end() {
     results.textContent = score;
     removeClasses(startButton, 0);
     removeClasses(soresControl, 0)
-    score = 0;
     highScoreform.addEventListener("submit", (e) => {
         e.preventDefault()
         const hs = highScoreform.elements[0].value
-        localStorage.setItem("scores", `{name:${hs},score: ${score} } `)
+        const newValue = { name: hs, score: score }
+        storage.push(newValue)
+        localStorage.setItem("scores", JSON.stringify(storage))
+        score = 0;
 
         let timees = () => {
 
