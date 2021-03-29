@@ -18,6 +18,16 @@
     /* background-color: orangered */
 }
 
+.scoresname {
+    margin-bottom: 6rem;
+}
+
+.message {
+    color: red;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
 #quizContainer {
     border: red solid 10px;
     margin-bottom: 6rem;

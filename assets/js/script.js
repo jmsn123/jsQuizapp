@@ -16,6 +16,9 @@ const time = document.querySelector("#timer");
 const results = document.getElementById("results");
 startButton.addEventListener("click", start);
 let t;
+const soresControl = document.querySelector(".scoresname")
+let storage = localStorage.getItem('scores') || []
+const highScoreform = document.querySelector("#highScoreinput")
 nextButton.addEventListener("click", function() {
     if (currentQuest === myQuestions.length) {
         end();
@@ -28,7 +31,9 @@ nextButton.addEventListener("click", function() {
     setupQuestion();
     setupAnswers();
 });
+highScoreform.addEventListener("submit", () => {
 
+})
 const myQuestions = [{
         question: "Who invented JavaScript?",
         answers: ["Douglas Crockford", "Sheryl Sandberg", "Brendan Eich"],
@@ -46,21 +51,7 @@ const myQuestions = [{
     },
 ];
 
-// function timer() {
-//     let count = 60;
-//     count--;
-//     console.log("strated timer")
-//     const interval = setInterval(() => {
-//         time.innerHTML = count
-//         console.log()
-//         if (count <= 0) {
-//             count = 0;
-//             clearInterval(interval)
-//             end()
-//         }
-//     }, 1000);
 
-// }
 
 let count = 60;
 
@@ -109,6 +100,7 @@ function setupQuestion() {
 }
 
 function setupAnswers() {
+    answers.classList.remove("hide")
     for (let i = 0; i < myQuestions[currentQuest].answers.length; i++) {
         let answer = document.createElement("button");
         // console.log(questionIndex.answers);
@@ -124,7 +116,6 @@ function setupAnswers() {
     }
     currentQuest++;
 }
-// setupQuestion();
 
 function removeClasses(elm, sw) {
     if (sw) {
@@ -135,8 +126,6 @@ function removeClasses(elm, sw) {
         elm.classList.add("show");
     }
 }
-
-
 
 function checkAnswers(e) {
     var selectedAnswer = e.target.dataset;
@@ -167,12 +156,37 @@ function checkAnswers(e) {
     }
 }
 
+function saveScore() {
+
+}
+
 function end() {
+    const message = document.querySelector(".message")
+    let count2 = 10
     count = 0;
     clearInterval(t)
     removeClasses(nextButton, 1);
     console.log("end")
     results.textContent = score;
     removeClasses(startButton, 0);
+    removeClasses(soresControl, 0)
     score = 0;
+    highScoreform.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const hs = highScoreform.elements[0].value
+        localStorage.setItem("scores", `{name:${hs},score: ${score} } `)
+
+        let timees = () => {
+
+            message.textContent = ` We are going to the high Scores page in ${count2}`
+            count2--
+
+            if (count2 === 0) {
+                location.replace('scores.html')
+            }
+        }
+        const messageTime = setInterval(timees, 1000)
+
+    })
+
 }
