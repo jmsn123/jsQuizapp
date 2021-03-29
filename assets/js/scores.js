@@ -1,0 +1,1 @@
+const socresList = document.querySelector("#userScore")
