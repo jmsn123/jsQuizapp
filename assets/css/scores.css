@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.scores {
+    margin: 2rem auto
+}
+
+#userScore {
+    list-style-type: none;
+}
+
+button {
+    padding: 20px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    background-color: green;
+    color: #fff
+}

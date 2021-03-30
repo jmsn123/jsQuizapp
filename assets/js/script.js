@@ -2,7 +2,6 @@ const quizContainer = document.querySelector("#quizContainer");
 const resultsContainer = document.querySelector("#results");
 const submitButton = document.querySelector("#submit");
 const prevButton = document.querySelector("#pre");
-const nextButton = document.querySelector("#next");
 const answers = document.querySelector(".answers");
 var currentQuest = 0;
 let startdiv = document.querySelector(".start")
@@ -19,21 +18,8 @@ let t;
 const soresControl = document.querySelector(".scoresname")
 let storage = JSON.parse(localStorage.getItem('scores')) || []
 const highScoreform = document.querySelector("#highScoreinput")
-nextButton.addEventListener("click", function() {
-    if (currentQuest === myQuestions.length) {
-        end();
-        console.log("here")
-        clearElement([question, answers])
-        return;
 
-    }
-    clearElement([question, answers])
-    setupQuestion();
-    setupAnswers();
-});
-highScoreform.addEventListener("submit", () => {
 
-})
 const myQuestions = [{
         question: "Who invented JavaScript?",
         answers: ["Douglas Crockford", "Sheryl Sandberg", "Brendan Eich"],
@@ -131,7 +117,6 @@ function checkAnswers(e) {
     var selectedAnswer = e.target.dataset;
     if (selectedAnswer.correct) {
         answers.remove();
-        nextButton.classList.add("show");
         e.target.classList.add("correct");
         score += 5;
         clearElement([question, answers])
@@ -144,7 +129,6 @@ function checkAnswers(e) {
     } else {
         count -= 5
         answers.remove();
-        nextButton.classList.add("show");
         e.target.classList.add("correct");
         clearElement([question, answers])
         if (currentQuest === myQuestions.length) {
@@ -165,7 +149,6 @@ function end() {
     let count2 = 10
     count = 0;
     clearInterval(t)
-    removeClasses(nextButton, 1);
     console.log("end")
     results.textContent = score;
     removeClasses(startButton, 0);

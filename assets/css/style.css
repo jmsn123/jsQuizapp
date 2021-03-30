@@ -18,6 +18,15 @@
     /* background-color: orangered */
 }
 
+.rules {
+    list-style-type: none;
+    text-align: center;
+}
+
+.rules li {
+    font-size: 3rem;
+}
+
 .scoresname {
     margin-bottom: 6rem;
 }
@@ -44,6 +53,11 @@
     /* height: 100vh; */
     border: orange solid 10px;
     text-align: center;
+}
+
+.jumbotron h2 {
+    font-size: 10rem;
+    color: green
 }
 
 .show {
